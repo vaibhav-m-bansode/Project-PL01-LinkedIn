@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: userService
+server:
+  port: 8020
