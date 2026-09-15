@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: apiGateWay
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/v1/users/**
+              filters:
+                - StripPrefix=2
+
+            - id: post-service
+              uri: lb://POST-SERVICE
+              predicates:
+                - Path=/api/v1/posts/**
+              filters:
+                - StripPrefix=2
+                - name: JwtAuthenticationFilter
+
+            - id: connection-service
+              uri: lb://CONNECTION-SERVICE
+              predicates:
+                - Path=/api/v1/connections/**
+              filters:
+                - StripPrefix=2
+                - name: JwtAuthenticationFilter
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone : http://localhost:8761/eureka
+
+jwt:
+  secret:  ajnfiofnvinwirsigniowornkmikmvoknisngengogiieriiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii

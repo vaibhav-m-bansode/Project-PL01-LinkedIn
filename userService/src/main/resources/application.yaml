@@ -1,5 +1,26 @@
 spring:
   application:
-    name: userService
+    name: user-service
+  datasource:
+      url: jdbc:postgresql://localhost:5432/PostDB
+      username: postgres
+      password: root
+  jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+
+
 server:
   port: 8020
+  servlet:
+    context-path: /users
+
+jwt:
+  secret:  ajnfiofnvinwirsigniowornkmikmvoknisngengogiieriiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone : http://localhost:8761/eureka
