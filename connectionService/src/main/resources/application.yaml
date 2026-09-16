@@ -7,7 +7,7 @@ spring:
       username:
       password:
 server:
-  port: 9030
+  port: 9040
   servlet:
     context-path: /connections
 eureka:

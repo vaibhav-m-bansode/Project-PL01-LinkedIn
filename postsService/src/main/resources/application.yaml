@@ -11,7 +11,7 @@ spring:
     show-sql: true
 
 server:
-  port: 9020
+  port: 9030
   servlet:
     context-path: /posts
 eureka:
