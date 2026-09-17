@@ -4,6 +4,7 @@ import com.vaibhavbansode.connectionService.entity.Person;
 import com.vaibhavbansode.connectionService.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,9 @@ public class ConnectionController {
     private final PersonService personService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<Person>> getConnections(@PathVariable Long userId, @RequestHeader("X-User-Id") Long userIdFromHeader) {
-        log.info("getConnections({}, {})", userId, userIdFromHeader);
-        var personList = personService.findAllConnections(userId);
+    public ResponseEntity<List<Long>> getFirstDegreeConnection(@PathVariable Long userId, @RequestHeader("X-User-Id") Long userIdFromHeader) {
+        log.info("getFirstDegreeConnection({}, {})", userId, userIdFromHeader);
+        var personList = personService.getFirstDegreeConnection(userId);
         return ResponseEntity.ok().body(personList);
     }
     @GetMapping("/{userId}/second-degree")
@@ -32,5 +33,14 @@ public class ConnectionController {
     public ResponseEntity<List<Person>> findThirdDegreeConnections(@PathVariable Long userID) {
         var personList = personService.findThirdDegreeConnections(userID);
         return ResponseEntity.ok(personList);
+    }
+
+    @PostMapping("/internal")
+    public ResponseEntity<Void> createPerson(
+            @RequestParam Long userId) {
+
+        personService.createPerson(userId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

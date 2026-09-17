@@ -1,7 +1,8 @@
 package com.vaibhavbansode.postsService.dto;
 
-public class PersonDto {
-    private Long id;
 
-    private Long userId;
+public record PersonDto(
+        Long id,
+        Long userId
+) {
 }

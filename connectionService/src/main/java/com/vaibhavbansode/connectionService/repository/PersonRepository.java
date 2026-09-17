@@ -5,6 +5,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonRepository extends Neo4jRepository<Person,Long> {
 
@@ -23,11 +24,13 @@ public interface PersonRepository extends Neo4jRepository<Person,Long> {
     List<Person> getThirdDegreeConnectionsByUserId(Long userID);
 
     @Query("""
-            MATCH (p:Person {currentUserId: $currentUserId})-[:CONNECTED_TO*1..]-(q:Person)
+            MATCH (p:Person {currentUserId: $currentUserId})-[:CONNECTED_TO*1..1]-(q:Person)
             WHERE p <> q
             RETURN DISTINCT q
             """)
-    List<Person> getAllConnections(Long currentUserId);
+    List<Long> getFirstDegreeConnection(Long currentUserId);
 
+    Optional<Person> findByUserId(Long userId);
 
+    boolean existsByUserId(Long userId);
 }

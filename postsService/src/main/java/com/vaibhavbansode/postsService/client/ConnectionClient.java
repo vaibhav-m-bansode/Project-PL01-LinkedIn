@@ -6,19 +6,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.sql.Connection;
 import java.util.List;
 
 @FeignClient(
-        name = "CONNECTION-SERVICE",
+        name = "connection-service",
         path = "/connections"
 )
 public interface ConnectionClient {
 
     @GetMapping("/core/{userId}")
-    List<Connection> getConnections(
+    List<Long> getFirstDegreeConnection(
             @PathVariable Long userId
     );
     @GetMapping("/{userId}/second-degree")
-    public ResponseEntity<List<PersonDto>> findSecondDegreeConnections( @PathVariable Long userId);
+    ResponseEntity<List<PersonDto>> findSecondDegreeConnections(@PathVariable Long userId);
 }

@@ -25,8 +25,20 @@ public class PersonService {
         return personRepository.getThirdDegreeConnectionsByUserId(userID);
     }
 
-    public List<Person> findAllConnections(Long userId) {
+    public List<Long> getFirstDegreeConnection(Long userId) {
         log.info("finding all connections from user {}", userId);
-        return personRepository.getAllConnections(userId);
+        return personRepository.getFirstDegreeConnection(userId);
+    }
+
+    public Person createPerson(Long userId) {
+        log.info("creating person {}", userId);
+        if (personRepository.existsByUserId(userId)) {
+            throw new RuntimeException("Person already exists for user: " + userId);
+        }
+
+        Person person = new Person();
+        person.setUserId(userId);
+
+        return personRepository.save(person);
     }
 }

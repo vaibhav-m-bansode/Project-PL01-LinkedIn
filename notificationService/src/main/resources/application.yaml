@@ -22,9 +22,7 @@ spring:
       properties:
         spring.json.trusted.packages: "com.vaibhavbansode.*"
 
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.LongSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 
 server:
   port: 9020
