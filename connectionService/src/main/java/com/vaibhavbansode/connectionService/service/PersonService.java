@@ -2,6 +2,7 @@ package com.vaibhavbansode.connectionService.service;
 
 import com.vaibhavbansode.connectionService.entity.Person;
 import com.vaibhavbansode.connectionService.repository.PersonRepository;
+import com.vaibhavbansode.userService.event.UserCreated;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,15 +31,16 @@ public class PersonService {
         return personRepository.getFirstDegreeConnection(userId);
     }
 
-    public Person createPerson(Long userId) {
-        log.info("creating person {}", userId);
-        if (personRepository.existsByUserId(userId)) {
-            throw new RuntimeException("Person already exists for user: " + userId);
+
+    public void createPerson(UserCreated userCreated) {
+        log.info("creating person {}", userCreated);
+        if (personRepository.existsByUserId(userCreated.getUserId())) {
+            throw new RuntimeException("Person already exists for user: " + userCreated.getUserId());
         }
 
         Person person = new Person();
-        person.setUserId(userId);
-
-        return personRepository.save(person);
+        person.setUserId(userCreated.getUserId());
+        person.setName(userCreated.getName());
+        personRepository.save(person);
     }
 }

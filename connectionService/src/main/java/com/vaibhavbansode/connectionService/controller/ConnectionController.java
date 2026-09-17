@@ -4,7 +4,6 @@ import com.vaibhavbansode.connectionService.entity.Person;
 import com.vaibhavbansode.connectionService.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,12 +34,12 @@ public class ConnectionController {
         return ResponseEntity.ok(personList);
     }
 
-    @PostMapping("/internal")
-    public ResponseEntity<Void> createPerson(
-            @RequestParam Long userId) {
-
-        personService.createPerson(userId);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+//    @PostMapping("/internal")
+//    public ResponseEntity<Void> createPerson(
+//            @RequestParam Long userId) {
+//
+//        personService.createPerson(userId);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).build();
+//    }
 }

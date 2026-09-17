@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class KafkaConsumer {
+public class PostServiceKafkaConsumer {
 
     private final NotificationService notificationService;
 

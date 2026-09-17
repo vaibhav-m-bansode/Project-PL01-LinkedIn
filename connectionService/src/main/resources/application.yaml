@@ -6,6 +6,18 @@ spring:
     authentication:
       username: neo4j
       password: password
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    consumer:
+      group-id: ${spring.application.name}
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+
+
+      properties:
+        spring.json.trusted.packages: "com.vaibhavbansode.*"
 
 server:
   port: 9040
