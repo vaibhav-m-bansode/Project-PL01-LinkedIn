@@ -1,0 +1,14 @@
+server:
+  port: 8082
+logging:
+  level:
+    root: INFO
+    io.kafbat.ui: DEBUG
+spring:
+  jmx:
+    enabled: true
+
+kafka:
+  clusters:
+    - name: local
+      bootstrapServers: localhost:9092
