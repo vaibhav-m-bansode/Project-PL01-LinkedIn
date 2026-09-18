@@ -1,12 +1,12 @@
 package com.vaibhavbansode.postsService.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +23,9 @@ public class Post {
 
     @Column(nullable = false)
     private String content;
+
+    private List<String> filesUrls;
+
 
     @CreationTimestamp
     private LocalDateTime createdAt;

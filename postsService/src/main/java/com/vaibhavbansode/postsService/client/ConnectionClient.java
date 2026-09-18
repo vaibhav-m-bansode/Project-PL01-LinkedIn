@@ -15,9 +15,8 @@ import java.util.List;
 public interface ConnectionClient {
 
     @GetMapping("/core/{userId}")
-    List<Long> getFirstDegreeConnection(
-            @PathVariable Long userId
-    );
+    List<Long> getFirstDegreeConnection(@PathVariable Long userId);
+
     @GetMapping("/{userId}/second-degree")
     ResponseEntity<List<PersonDto>> findSecondDegreeConnections(@PathVariable Long userId);
 }

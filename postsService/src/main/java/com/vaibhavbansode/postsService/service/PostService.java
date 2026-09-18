@@ -2,6 +2,7 @@ package com.vaibhavbansode.postsService.service;
 
 import com.vaibhavbansode.postsService.auth.AuthContextHolder;
 import com.vaibhavbansode.postsService.client.ConnectionClient;
+import com.vaibhavbansode.postsService.client.UploaderClient;
 import com.vaibhavbansode.postsService.dto.PostCreateRequestDto;
 import com.vaibhavbansode.postsService.dto.PostDto;
 import com.vaibhavbansode.postsService.entity.Post;
@@ -11,8 +12,10 @@ import com.vaibhavbansode.postsService.mapper.PostMapper;
 import com.vaibhavbansode.postsService.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,16 +28,31 @@ public class PostService {
     private final PostRepository postRepository;
     private final KafkaTemplate<Long, PostCreated> postCreatedKafkaTemplate;
     private final ConnectionClient connectionClient;
+    private final UploaderClient uploaderClient;
 
-    public PostDto createPost(PostCreateRequestDto request) {
+    public PostDto createPost(PostCreateRequestDto request, List<MultipartFile> files) {
 
         Long userId = AuthContextHolder.getCurrentUserId();
 
         log.info("Creating post for user {}", userId);
 
+
         Post post = postMapper.toPost(request);
         post.setUserId(userId);
 
+        if (files != null && !files.isEmpty()) {
+            for (MultipartFile file : files) {
+
+                if (file.isEmpty()) {
+                    continue;
+                }
+
+                ResponseEntity<String> response =
+                        uploaderClient.uploadfile(file);
+
+                post.getFilesUrls().add(response.getBody());
+            }
+        }
         Post createdPost = postRepository.save(post);
 
         // Get first-degree connections

@@ -34,12 +34,24 @@ public class ConnectionController {
         return ResponseEntity.ok(personList);
     }
 
-//    @PostMapping("/internal")
-//    public ResponseEntity<Void> createPerson(
-//            @RequestParam Long userId) {
-//
-//        personService.createPerson(userId);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).build();
-//    }
+    @PostMapping("/request/{userId}")
+    public ResponseEntity<Void> sendConnectionRequest(@PathVariable Long userId) {
+        personService.sendConnectionRequest(userId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/accept/{userId}")
+    public ResponseEntity<Void> acceptConnectionRequest(@PathVariable Long userId) {
+        personService.acceptConnectionRequest(userId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/reject/{userId}")
+    public ResponseEntity<Void> rejectConnectionRequest(@PathVariable Long userId) {
+        personService.rejectConnectionRequest(userId);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
 }
