@@ -2,9 +2,9 @@ spring:
   application:
     name: user-service
   datasource:
-    url: jdbc:postgresql://${POST_SERVICE_DB_SERVER}:5432/PostDB
-    username: ${POST_SERVICE_DB_USERNAME}
-    password: ${POST_SERVICE_DB_PASSWORD}
+    url: jdbc:postgresql://${DB_SERVER}:5432/PostDB
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   kafka:
     bootstrap-servers: kafka:9092
 
@@ -15,7 +15,6 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
-
 USER_SERVICE_URI: http://user-service
 CONNECTION_SERVICE_URI: http://connection-service
 UPLOADER_SERVICE_URI: http://uploader-service

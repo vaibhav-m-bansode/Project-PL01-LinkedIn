@@ -38,7 +38,7 @@ spring:
                 - name: JwtAuthenticationFilter
 
             - id: notification-service
-              uri: ${NOTIFICATION_SERVICE_URI:lb://UPLOADER-SERVICE}
+              uri: ${NOTIFICATION_SERVICE_URI:lb://NOTIFICATION-SERVICE}
               predicates:
                 - Path=/api/v1/notification/**
               filters:
