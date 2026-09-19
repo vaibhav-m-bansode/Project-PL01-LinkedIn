@@ -7,14 +7,14 @@ spring:
         webflux:
           routes:
             - id: user-service
-              uri: lb://USER-SERVICE
+              uri: ${USER_SERVICE_URI:lb://USER-SERVICE}
               predicates:
                 - Path=/api/v1/users/**
               filters:
                 - StripPrefix=2
 
             - id: post-service
-              uri: lb://POST-SERVICE
+              uri: ${POST_SERVICE_URI:lb://POST-SERVICE}
               predicates:
                 - Path=/api/v1/posts/**
               filters:
@@ -22,7 +22,7 @@ spring:
                 - name: JwtAuthenticationFilter
 
             - id: connection-service
-              uri: lb://CONNECTION-SERVICE
+              uri: ${CONNECTION_SERVICE_URI:lb://CONNECTION-SERVICE}
               predicates:
                 - Path=/api/v1/connections/**
               filters:
@@ -30,9 +30,17 @@ spring:
                 - name: JwtAuthenticationFilter
 
             - id: uploader-service
-              uri: lb://UPLOADER-SERVICE
+              uri: ${UPLOADER_SERVICE_URI:lb://UPLOADER-SERVICE}
               predicates:
                 - Path=/api/v1/uploader/**
+              filters:
+                - StripPrefix=2
+                - name: JwtAuthenticationFilter
+
+            - id: notification-service
+              uri: ${NOTIFICATION_SERVICE_URI:lb://UPLOADER-SERVICE}
+              predicates:
+                - Path=/api/v1/notification/**
               filters:
                 - StripPrefix=2
                 - name: JwtAuthenticationFilter

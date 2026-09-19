@@ -6,7 +6,6 @@ import com.vaibhavbansode.userService.dto.UserDto;
 import com.vaibhavbansode.userService.entity.User;
 import com.vaibhavbansode.userService.event.UserCreated;
 import com.vaibhavbansode.userService.exception.BadRequestException;
-import com.vaibhavbansode.userService.feignClient.ConnectionClient;
 import com.vaibhavbansode.userService.mapper.UserMapper;
 import com.vaibhavbansode.userService.repository.UserRepository;
 import com.vaibhavbansode.userService.util.BCrypt;
@@ -24,7 +23,6 @@ public class userService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final JwtService jwtService;
-    private final ConnectionClient connectionClient;
     private final KafkaTemplate<Long, UserCreated> userCreatedKafkaTemplate;
 
 

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: connection-service
+  neo4j:
+    uri: bolt://${DB_SERVER}:7687
+    authentication:
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+
+  kafka:
+    bootstrap-servers: kafka:9092
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

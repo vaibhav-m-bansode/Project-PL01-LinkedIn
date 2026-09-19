@@ -149,6 +149,27 @@
 					</execution>
 				</executions>
 			</plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.6</version>
+
+                <configuration>
+                    <to>
+                        <image>docker.io/vaibhavbansode/${project.artifactId}:${project.version}</image>
+                    </to>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>jib-build</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 

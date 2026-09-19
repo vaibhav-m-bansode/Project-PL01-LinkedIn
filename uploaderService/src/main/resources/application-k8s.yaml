@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: uploader-service
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+my_cloud_name: ${MY_CLOUD_NAME}
+my_api_secret: ${MY_API_SECRETE}
+my_api_key: ${MY_API_KEY}
+gcp:
+  bucket-name: ${GCP_BUCKET_NAME}

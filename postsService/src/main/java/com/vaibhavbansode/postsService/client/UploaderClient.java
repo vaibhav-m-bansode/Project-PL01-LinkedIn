@@ -9,7 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @FeignClient(
         name = "uploader-service",
-        path = "/uploader"
+        path = "/uploader",
+        url = "${UPLOADER_SERVICE_URI:}"
 )
 public interface UploaderClient {
 

@@ -10,7 +10,8 @@ import java.util.List;
 
 @FeignClient(
         name = "connection-service",
-        path = "/connections"
+        path = "/connections",
+        url = "${CONNECTION_SERVICE_URI:}"
 )
 public interface ConnectionClient {
 
